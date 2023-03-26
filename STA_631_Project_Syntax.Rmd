@@ -1,0 +1,38 @@
+---
+title: "STA_631_Final_Project"
+output: html_notebook
+---
+
+```{r setup}
+rm(list=ls())
+setwd("/home/torent/STA 631/Final_Project/STA_631_Project") #setwd("/home/torent/CIS 671/CIS 671 Project")
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(data.table)
+library(stringr)
+```
+
+```{r load_data}
+batting_data <- read_csv("mlbbat10.csv")
+person_data <- read_csv("People.csv")
+```
+
+```{r clean_data}
+
+batting_data <- batting_data %>%
+  select(c("name", "team", "position", "bat_avg"))
+  
+person_data$name <- paste(substr(person_data$nameFirst,1,1),"",person_data$nameLast)
+
+person_data <- person_data %>% select(c("birthYear", "birthMonth", "birthCountry", "birthState", "weight", "height"))
+```
+
+
+```{r combined_data}
+dfList <- list(batting_data, person_data)
+batting_person <- Reduce(function(x, y) merge(x, y), dfList) #, all = TRUE
+# batting_person <- merge(batting_data, person_data)
+```
+
