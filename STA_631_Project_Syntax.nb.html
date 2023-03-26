@@ -221,77 +221,15 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm0obGlzdD1scygpKVxuc2V0d2QoXCIvaG9tZS90b3JlbnQvU1RBIDYzMS9GaW5hbF9Qcm9qZWN0L1NUQV82MzFfUHJvamVjdFwiKSAjc2V0d2QoXCIvaG9tZS90b3JlbnQvQ0lTIDY3MS9DSVMgNjcxIFByb2plY3RcIilcbmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSlcbmxpYnJhcnkodGlkeXZlcnNlKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucm0obGlzdD1scygpKVxuc2V0d2QoXCIvaG9tZS90b3JlbnQvU1RBIDYzMS9GaW5hbF9Qcm9qZWN0L1NUQV82MzFfUHJvamVjdFwiKSAjc2V0d2QoXCIvaG9tZS90b3JlbnQvQ0lTIDY3MS9DSVMgNjcxIFByb2plY3RcIilcbmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSlcbmxpYnJhcnkodGlkeXZlcnNlKVxubGlicmFyeSh0aWR5bW9kZWxzKVxubGlicmFyeShHR2FsbHkpXG5saWJyYXJ5KGRhdGEudGFibGUpXG5saWJyYXJ5KHN0cmluZ3IpXG5gYGAifQ== -->
 <pre class="r"><code>rm(list=ls())
 setwd(&quot;/home/torent/STA 631/Final_Project/STA_631_Project&quot;) #setwd(&quot;/home/torent/CIS 671/CIS 671 Project&quot;)
 knitr::opts_chunk$set(echo = TRUE)
-library(tidyverse)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2RzIG92ZXJ3cml0dGVuIGJ5ICdkYnBseXInOlxuICBtZXRob2QgICAgICAgICBmcm9tXG4gIHByaW50LnRibF9sYXp5ICAgICBcbiAgcHJpbnQudGJsX3NxbCAgICAgIFxuIn0= -->
-<pre><code>Registered S3 methods overwritten by &#39;dbplyr&#39;:
-  method         from
-  print.tbl_lazy     
-  print.tbl_sql      </code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeXZlcnNlIDEuMy4yIOKUgOKUgFxu4pyUIGdncGxvdDIgMy4zLjYgICAgICDinJQgcHVycnIgICAwLjMuNCBcbuKclCB0aWJibGUgIDMuMS44ICAgICAg4pyUIGRwbHlyICAgMS4wLjEwXG7inJQgdGlkeXIgICAxLjIuMCAgICAgIOKclCBzdHJpbmdyIDEuNC4xIFxu4pyUIHJlYWRyICAgMi4xLjIgICAgICDinJQgZm9yY2F0cyAwLjUuMiBcbuKUgOKUgCBDb25mbGljdHMg4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSA4pSAIHRpZHl2ZXJzZV9jb25mbGljdHMoKSDilIDilIBcbuKcliBkcGx5cjo6ZmlsdGVyKCkgbWFza3Mgc3RhdHM6OmZpbHRlcigpXG7inJYgZHBseXI6OmxhZygpICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxuIn0= -->
-<pre><code>── Attaching packages ───────────────────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6      ✔ purrr   0.3.4 
-✔ tibble  3.1.8      ✔ dplyr   1.0.10
-✔ tidyr   1.2.0      ✔ stringr 1.4.1 
-✔ readr   2.1.2      ✔ forcats 0.5.2 
-── Conflicts ──────────────────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5bW9kZWxzKVxuYGBgIn0= -->
-<pre class="r"><code>library(tidymodels)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoi4pSA4pSAIEF0dGFjaGluZyBwYWNrYWdlcyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeW1vZGVscyAxLjAuMCDilIDilIBcbuKclCBicm9vbSAgICAgICAgMS4wLjAgICAgIOKclCByc2FtcGxlICAgICAgMS4xLjBcbuKclCBkaWFscyAgICAgICAgMS4wLjAgICAgIOKclCB0dW5lICAgICAgICAgMS4wLjBcbuKclCBpbmZlciAgICAgICAgMS4wLjMgICAgIOKclCB3b3JrZmxvd3MgICAgMS4wLjBcbuKclCBtb2RlbGRhdGEgICAgMS4wLjAgICAgIOKclCB3b3JrZmxvd3NldHMgMS4wLjBcbuKclCBwYXJzbmlwICAgICAgMS4wLjEgICAgIOKclCB5YXJkc3RpY2sgICAgMS4wLjBcbuKclCByZWNpcGVzICAgICAgMS4wLjEgICAgIFxu4pSA4pSAIENvbmZsaWN0cyDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIDilIAgdGlkeW1vZGVsc19jb25mbGljdHMoKSDilIDilIBcbuKcliBzY2FsZXM6OmRpc2NhcmQoKSBtYXNrcyBwdXJycjo6ZGlzY2FyZCgpXG7inJYgZHBseXI6OmZpbHRlcigpICAgbWFza3Mgc3RhdHM6OmZpbHRlcigpXG7inJYgcmVjaXBlczo6Zml4ZWQoKSAgbWFza3Mgc3RyaW5ncjo6Zml4ZWQoKVxu4pyWIGRwbHlyOjpsYWcoKSAgICAgIG1hc2tzIHN0YXRzOjpsYWcoKVxu4pyWIHlhcmRzdGljazo6c3BlYygpIG1hc2tzIHJlYWRyOjpzcGVjKClcbuKcliByZWNpcGVzOjpzdGVwKCkgICBtYXNrcyBzdGF0czo6c3RlcCgpXG7igKIgVXNlIHN1cHByZXNzUGFja2FnZVN0YXJ0dXBNZXNzYWdlcygpIHRvIGVsaW1pbmF0ZSBwYWNrYWdlIHN0YXJ0dXAgbWVzc2FnZXNcbiJ9 -->
-<pre><code>── Attaching packages ──────────────────────────────────────────────────── tidymodels 1.0.0 ──
-✔ broom        1.0.0     ✔ rsample      1.1.0
-✔ dials        1.0.0     ✔ tune         1.0.0
-✔ infer        1.0.3     ✔ workflows    1.0.0
-✔ modeldata    1.0.0     ✔ workflowsets 1.0.0
-✔ parsnip      1.0.1     ✔ yardstick    1.0.0
-✔ recipes      1.0.1     
-── Conflicts ─────────────────────────────────────────────────────── tidymodels_conflicts() ──
-✖ scales::discard() masks purrr::discard()
-✖ dplyr::filter()   masks stats::filter()
-✖ recipes::fixed()  masks stringr::fixed()
-✖ dplyr::lag()      masks stats::lag()
-✖ yardstick::spec() masks readr::spec()
-✖ recipes::step()   masks stats::step()
-• Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShHR2FsbHkpXG5gYGAifQ== -->
-<pre class="r"><code>library(GGally)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ0dHYWxseSc6XG4gIG1ldGhvZCBmcm9tICAgXG4gICsuZ2cgICBnZ3Bsb3QyXG4ifQ== -->
-<pre><code>Registered S3 method overwritten by &#39;GGally&#39;:
-  method from   
-  +.gg   ggplot2</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShkYXRhLnRhYmxlKVxuYGBgIn0= -->
-<pre class="r"><code>library(data.table)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiUmVnaXN0ZXJlZCBTMyBtZXRob2Qgb3ZlcndyaXR0ZW4gYnkgJ2RhdGEudGFibGUnOlxuICBtZXRob2QgICAgICAgICAgIGZyb21cbiAgcHJpbnQuZGF0YS50YWJsZSAgICAgXG5kYXRhLnRhYmxlIDEuMTQuMiB1c2luZyA0NSB0aHJlYWRzIChzZWUgP2dldERUdGhyZWFkcykuICBMYXRlc3QgbmV3czogci1kYXRhdGFibGUuY29tXG5cbkF0dGFjaGluZyBwYWNrYWdlOiDigJhkYXRhLnRhYmxl4oCZXG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0cyBhcmUgbWFza2VkIGZyb20g4oCYcGFja2FnZTpkcGx5cuKAmTpcblxuICAgIGJldHdlZW4sIGZpcnN0LCBsYXN0XG5cblRoZSBmb2xsb3dpbmcgb2JqZWN0IGlzIG1hc2tlZCBmcm9tIOKAmHBhY2thZ2U6cHVycnLigJk6XG5cbiAgICB0cmFuc3Bvc2VcbiJ9 -->
-<pre><code>Registered S3 method overwritten by &#39;data.table&#39;:
-  method           from
-  print.data.table     
-data.table 1.14.2 using 45 threads (see ?getDTthreads).  Latest news: r-datatable.com
-
-Attaching package: ‘data.table’
-
-The following objects are masked from ‘package:dplyr’:
-
-    between, first, last
-
-The following object is masked from ‘package:purrr’:
-
-    transpose</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzdHJpbmdyKVxuYGBgIn0= -->
-<pre class="r"><code>library(stringr)</code></pre>
+library(tidyverse)
+library(tidymodels)
+library(GGally)
+library(data.table)
+library(stringr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -328,14 +266,14 @@ date  (2): debut, finalGame
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYXR0aW5nX2RhdGEgPC0gYmF0dGluZ19kYXRhICU+JVxuICBzZWxlY3QoYyhcIm5hbWVcIiwgXCJ0ZWFtXCIsIFwicG9zaXRpb25cIiwgXCJiYXRfYXZnXCIpKVxuICBcbnBlcnNvbl9kYXRhJG5hbWUgPC0gcGFzdGUoc3Vic3RyKHBlcnNvbl9kYXRhJG5hbWVGaXJzdCwxLDEpLFwiXCIscGVyc29uX2RhdGEkbmFtZUxhc3QpXG5cbnBlcnNvbl9kYXRhIDwtIHBlcnNvbl9kYXRhICU+JSBzZWxlY3QoYyhcImJpcnRoWWVhclwiLCBcImJpcnRoTW9udGhcIiwgXCJiaXJ0aENvdW50cnlcIiwgXCJiaXJ0aFN0YXRlXCIsIFwid2VpZ2h0XCIsIFwiaGVpZ2h0XCIpKVxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5iYXR0aW5nX2RhdGEgPC0gYmF0dGluZ19kYXRhICU+JVxuICBzZWxlY3QoYyhcIm5hbWVcIiwgXCJ0ZWFtXCIsIFwicG9zaXRpb25cIiwgXCJiYXRfYXZnXCIpKVxuICBcbnBlcnNvbl9kYXRhJG5hbWUgPC0gcGFzdGUoc3Vic3RyKHBlcnNvbl9kYXRhJG5hbWVGaXJzdCwxLDEpLHBlcnNvbl9kYXRhJG5hbWVMYXN0KVxuXG5wZXJzb25fZGF0YSA8LSBwZXJzb25fZGF0YSAlPiUgc2VsZWN0KGMoXCJuYW1lXCIsXCJiaXJ0aFllYXJcIixcImJpcnRoTW9udGhcIiwgXCJiaXJ0aENvdW50cnlcIixcImJpcnRoU3RhdGVcIixcIndlaWdodFwiLFwiaGVpZ2h0XCIpKVxuYGBgIn0= -->
 <pre class="r"><code>
 batting_data &lt;- batting_data %&gt;%
   select(c(&quot;name&quot;, &quot;team&quot;, &quot;position&quot;, &quot;bat_avg&quot;))
   
-person_data$name &lt;- paste(substr(person_data$nameFirst,1,1),&quot;&quot;,person_data$nameLast)
+person_data$name &lt;- paste(substr(person_data$nameFirst,1,1),person_data$nameLast)
 
-person_data &lt;- person_data %&gt;% select(c(&quot;birthYear&quot;, &quot;birthMonth&quot;, &quot;birthCountry&quot;, &quot;birthState&quot;, &quot;weight&quot;, &quot;height&quot;))</code></pre>
+person_data &lt;- person_data %&gt;% select(c(&quot;name&quot;,&quot;birthYear&quot;,&quot;birthMonth&quot;, &quot;birthCountry&quot;,&quot;birthState&quot;,&quot;weight&quot;,&quot;height&quot;))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -350,7 +288,7 @@ batting_person &lt;- Reduce(function(x, y) merge(x, y), dfList) #, all = TRUE
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBXzYzMV9GaW5hbF9Qcm9qZWN0IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpgYGB7ciBzZXR1cH0Kcm0obGlzdD1scygpKQpzZXR3ZCgiL2hvbWUvdG9yZW50L1NUQSA2MzEvRmluYWxfUHJvamVjdC9TVEFfNjMxX1Byb2plY3QiKSAjc2V0d2QoIi9ob21lL3RvcmVudC9DSVMgNjcxL0NJUyA2NzEgUHJvamVjdCIpCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodGlkeW1vZGVscykKbGlicmFyeShHR2FsbHkpCmxpYnJhcnkoZGF0YS50YWJsZSkKbGlicmFyeShzdHJpbmdyKQpgYGAKCmBgYHtyIGxvYWRfZGF0YX0KYmF0dGluZ19kYXRhIDwtIHJlYWRfY3N2KCJtbGJiYXQxMC5jc3YiKQpwZXJzb25fZGF0YSA8LSByZWFkX2NzdigiUGVvcGxlLmNzdiIpCmBgYAoKYGBge3IgY2xlYW5fZGF0YX0KCmJhdHRpbmdfZGF0YSA8LSBiYXR0aW5nX2RhdGEgJT4lCiAgc2VsZWN0KGMoIm5hbWUiLCAidGVhbSIsICJwb3NpdGlvbiIsICJiYXRfYXZnIikpCiAgCnBlcnNvbl9kYXRhJG5hbWUgPC0gcGFzdGUoc3Vic3RyKHBlcnNvbl9kYXRhJG5hbWVGaXJzdCwxLDEpLCIiLHBlcnNvbl9kYXRhJG5hbWVMYXN0KQoKcGVyc29uX2RhdGEgPC0gcGVyc29uX2RhdGEgJT4lIHNlbGVjdChjKCJiaXJ0aFllYXIiLCAiYmlydGhNb250aCIsICJiaXJ0aENvdW50cnkiLCAiYmlydGhTdGF0ZSIsICJ3ZWlnaHQiLCAiaGVpZ2h0IikpCmBgYAoKCmBgYHtyIGNvbWJpbmVkX2RhdGF9CmRmTGlzdCA8LSBsaXN0KGJhdHRpbmdfZGF0YSwgcGVyc29uX2RhdGEpCmJhdHRpbmdfcGVyc29uIDwtIFJlZHVjZShmdW5jdGlvbih4LCB5KSBtZXJnZSh4LCB5KSwgZGZMaXN0KSAjLCBhbGwgPSBUUlVFCiMgYmF0dGluZ19wZXJzb24gPC0gbWVyZ2UoYmF0dGluZ19kYXRhLCBwZXJzb25fZGF0YSkKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU1RBXzYzMV9GaW5hbF9Qcm9qZWN0IgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCgpgYGB7ciBzZXR1cH0Kcm0obGlzdD1scygpKQpzZXR3ZCgiL2hvbWUvdG9yZW50L1NUQSA2MzEvRmluYWxfUHJvamVjdC9TVEFfNjMxX1Byb2plY3QiKSAjc2V0d2QoIi9ob21lL3RvcmVudC9DSVMgNjcxL0NJUyA2NzEgUHJvamVjdCIpCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkodGlkeW1vZGVscykKbGlicmFyeShHR2FsbHkpCmxpYnJhcnkoZGF0YS50YWJsZSkKbGlicmFyeShzdHJpbmdyKQpgYGAKCmBgYHtyIGxvYWRfZGF0YX0KYmF0dGluZ19kYXRhIDwtIHJlYWRfY3N2KCJtbGJiYXQxMC5jc3YiKQpwZXJzb25fZGF0YSA8LSByZWFkX2NzdigiUGVvcGxlLmNzdiIpCmBgYAoKYGBge3IgY2xlYW5fZGF0YX0KCmJhdHRpbmdfZGF0YSA8LSBiYXR0aW5nX2RhdGEgJT4lCiAgc2VsZWN0KGMoIm5hbWUiLCAidGVhbSIsICJwb3NpdGlvbiIsICJiYXRfYXZnIikpCiAgCnBlcnNvbl9kYXRhJG5hbWUgPC0gcGFzdGUoc3Vic3RyKHBlcnNvbl9kYXRhJG5hbWVGaXJzdCwxLDEpLHBlcnNvbl9kYXRhJG5hbWVMYXN0KQoKcGVyc29uX2RhdGEgPC0gcGVyc29uX2RhdGEgJT4lIHNlbGVjdChjKCJuYW1lIiwiYmlydGhZZWFyIiwiYmlydGhNb250aCIsICJiaXJ0aENvdW50cnkiLCJiaXJ0aFN0YXRlIiwid2VpZ2h0IiwiaGVpZ2h0IikpCmBgYAoKCmBgYHtyIGNvbWJpbmVkX2RhdGF9CmRmTGlzdCA8LSBsaXN0KGJhdHRpbmdfZGF0YSwgcGVyc29uX2RhdGEpCmJhdHRpbmdfcGVyc29uIDwtIFJlZHVjZShmdW5jdGlvbih4LCB5KSBtZXJnZSh4LCB5KSwgZGZMaXN0KSAjLCBhbGwgPSBUUlVFCiMgYmF0dGluZ19wZXJzb24gPC0gbWVyZ2UoYmF0dGluZ19kYXRhLCBwZXJzb25fZGF0YSkKYGBgCgo=</div>
 
 
 

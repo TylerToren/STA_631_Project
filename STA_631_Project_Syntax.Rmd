@@ -24,9 +24,9 @@ person_data <- read_csv("People.csv")
 batting_data <- batting_data %>%
   select(c("name", "team", "position", "bat_avg"))
   
-person_data$name <- paste(substr(person_data$nameFirst,1,1),"",person_data$nameLast)
+person_data$name <- paste(substr(person_data$nameFirst,1,1),person_data$nameLast)
 
-person_data <- person_data %>% select(c("birthYear", "birthMonth", "birthCountry", "birthState", "weight", "height"))
+person_data <- person_data %>% select(c("name","birthYear","birthMonth", "birthCountry","birthState","weight","height"))
 ```
 
 
