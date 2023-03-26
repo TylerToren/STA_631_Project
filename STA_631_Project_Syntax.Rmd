@@ -12,6 +12,7 @@ library(tidymodels)
 library(GGally)
 library(data.table)
 library(stringr)
+library(readr)
 ```
 
 ```{r load_data}
@@ -22,17 +23,105 @@ person_data <- read_csv("People.csv")
 ```{r clean_data}
 
 batting_data <- batting_data %>%
-  select(c("name", "team", "position", "bat_avg"))
+  select(c("name", "team", "position", "game", "at_bat", "bat_avg"))
   
 person_data$name <- paste(substr(person_data$nameFirst,1,1),person_data$nameLast)
 
-person_data <- person_data %>% select(c("name","birthYear","birthMonth", "birthCountry","birthState","weight","height"))
+person_data <- person_data %>% select(c("name","birthYear","birthMonth", "birthCountry","birthState","weight","height", "bats"))
 ```
-
 
 ```{r combined_data}
 dfList <- list(batting_data, person_data)
-batting_person <- Reduce(function(x, y) merge(x, y), dfList) #, all = TRUE
-# batting_person <- merge(batting_data, person_data)
+batting_person <- Reduce(function(x, y) merge(x, y), dfList) %>% 
+  filter(at_bat > 30)
+```
+
+```{r batting_avg_dist}
+batting_person %>% 
+  ggplot(aes(x=bat_avg)) + 
+  geom_histogram(bins = 24) + 
+  theme_bw()
+```
+
+```{r linear_models}
+height_model <- lm(bat_avg ~ height, data = batting_person)
+tidy(height_model)
+summary(height_model)
+deviance(height_model)
+
+# R^2 = 0.009531 (Too Low)
+
+weight_model <- lm(bat_avg ~ weight, data = batting_person)
+tidy(weight_model)
+summary(weight_model)
+deviance(weight_model)
+
+# R^2 = -0.000859 (Terrible)
+
+batting_person$birthMonth <- as.factor(batting_person$birthMonth)
+birthMonth_model <- lm(bat_avg ~ birthMonth, data = batting_person)
+tidy(birthMonth_model)
+summary(birthMonth_model)
+deviance(birthMonth_model)
+
+# R^2 = 0.001974 (Too Low)
+
+batting_person$birthState <- as.factor(batting_person$birthState)
+birthState_model <- lm(bat_avg ~ birthState, data = batting_person)
+tidy(birthState_model)
+summary(birthState_model)
+deviance(birthState_model)
+
+# R^2 = 0.01726 (Too Low)
+
+batting_person$birthState <- as.factor(batting_person$birthState)
+birthState_model <- lm(bat_avg ~ birthState, data = batting_person)
+tidy(birthState_model)
+summary(birthState_model)
+deviance(birthState_model)
+
+# R^2 and p-values too low
+
+batting_person$bats <- as.factor(batting_person$bats)
+bats_model <- lm(bat_avg ~ bats, data = batting_person)
+tidy(bats_model)
+summary(bats_model)
+deviance(bats_model)
+
+# R^2 and p-values too low
+
+batting_person$birthCountry <- as.factor(batting_person$birthCountry)
+birthCountry_model <- lm(bat_avg ~ birthCountry, data = batting_person)
+tidy(birthCountry_model)
+summary(birthCountry_model)
+deviance(birthCountry_model)
+
+# R^2 and p-values too low
+
+batting_person$birthYear <- batting_person$birthYear - 1844
+birthYear_model <- lm(bat_avg ~ birthYear, data = batting_person)
+tidy(birthYear_model)
+summary(birthYear_model)
+deviance(birthYear_model)
+
+# Terrible
+
+#Use these 2 models
+game_model <- lm(bat_avg ~ game, data = batting_person)
+tidy(game_model)
+summary(game_model)
+deviance(game_model)
+
+batting_person$position <- as.factor(batting_person$position)
+position_model <- lm(bat_avg ~ position, data = batting_person)
+tidy(position_model)
+summary(position_model)
+deviance(position_model)
+```
+
+```{r multi_linear_model}
+# Best model so far
+mlr_models <- lm(bat_avg ~ game + position, data = batting_person)
+summary(mlr_models)
 ```
 
