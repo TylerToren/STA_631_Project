@@ -49,9 +49,11 @@ salaries <- read.csv("Salaries.csv") %>%
          "Salary" = salary)
 
 collegeplaying <- read.csv("CollegePlaying.csv") %>% 
-  select(playerID, schoolID) %>% 
+  select(playerID, schoolID,yearID) %>% 
   rename("Player_ID" = playerID,
-         "School_Playing" = schoolID)
+         "School_Playing" = schoolID,
+         "Year_ID" = yearID)
+
 
 school <- read.csv("Schools.csv") %>% 
   select(schoolID,name_full) %>% 
@@ -62,6 +64,14 @@ awards <- read.csv("AwardsPlayers.csv") %>%
   select(playerID,awardID) %>% 
   rename("Player_ID" = playerID,
          "Awards" = awardID)
+
+batting <- batting[!duplicated(t(apply(batting,1,sort))),]
+people <- people[!duplicated(t(apply(people,1,sort))),]
+fielding <- fielding[!duplicated(t(apply(fielding,1,sort))),]
+salaries <- salaries[!duplicated(t(apply(salaries,1,sort))),]
+collegeplaying <- collegeplaying[!duplicated(t(apply(collegeplaying,1,sort))),]
+school <- school[!duplicated(t(apply(school,1,sort))),]
+awards <- awards[!duplicated(t(apply(awards,1,sort))),]
 
 #Merging all dataset to get one final dataset
 final_data <- merge(batting, people, by = "Player_ID")
@@ -86,10 +96,10 @@ final_data$FinalGame_Age <- as.integer((Sys.Date() - as.Date(final_data$Final_Ga
 
 
 # Create a correlation matrix to identify potential predictors
-cor(final_data[,c("Average", "At_Bats", "Hits", "Games_Played")])
+cor(final_data[,c("Average", "Games_Played", "Position", "Awards")])
 
 #Create a model
-model <- lm(Average ~ School_Playing, data = final_data %>% filter(At_Bats > 30))
+model <- lm(Average ~ Games_Played + Position + School_Playing, data = final_data %>% filter(At_Bats > 30))
 # Print summary of model results
 summary(model)
 
