@@ -35,6 +35,8 @@ person_data <- person_data %>% select(c("birthYear", "birthMonth", "birthCountry
 
 ```{r combined_data}
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
 dfList <- list(league_data, person_data)
 dfList2 <- list(batting_data, person_data)
 person_data <- Reduce(function(x, y) merge(x, y), dfList)
@@ -129,6 +131,10 @@ deviance(position_model)
 # Best model so far
 mlr_models <- lm(bat_avg ~ game + position, data = batting_person)
 summary(mlr_models)
+=======
+>>>>>>> 91e8827706b6bc17a9475a60851a61003808e591
+=======
+>>>>>>> 91e8827706b6bc17a9475a60851a61003808e591
 dfList <- list(batting_data, person_data)
 batting_person <- Reduce(function(x, y) merge(x, y), dfList) #, all = TRUE
 # batting_person <- merge(batting_data, person_data)
