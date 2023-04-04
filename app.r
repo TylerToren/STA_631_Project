@@ -122,32 +122,41 @@ ui <- fluidPage(
 
 # Define server logic
 server <- function(input, output) {
+  filtered_data <- reactive({
+    final_data %>% filter(At_Bats > 30)
+  })
+  
   independent_vars <- reactive({
     input$options
   })
+  
+  model <- reactive({
+    lm(Average ~ ., data = filtered_data()[, c("Average", independent_vars())])
+  })
+  
   output$selectedoptions <- renderPrint({
     paste("You have selected the following options:", paste(input$options, collapse = "+ "))
   })
+  
   output$mlr <- renderPlot({
-    filtered_data <- final_data %>% filter(At_Bats > 30)
-    model <- lm(Average ~., data = filtered_data[, c("Average", independent_vars())])
-    predicted <- predict(model, newdata = filtered_data)
-    ggplot(filtered_data, aes(x = Average, y = predicted)) +
+    predicted <- predict(model(), newdata = filtered_data())
+    ggplot(filtered_data(), aes(x = Average, y = predicted)) +
       geom_point() +
       geom_abline(intercept = 0, slope = 1, color = "red") +
       labs(x = "Actual Batting Average", y = "Predicted Batting Average")
   })
+  
   output$rdp <- renderPlot({
-    model <- lm(Average ~., data = filtered_data[, c("Average", independent_vars())])
-    qqnorm(model$residuals)
-    qqline(model$residuals)
+    qqnorm(model()$residuals)
+    qqline(model()$residuals)
   })
+  
   output$adj_r_squared <- renderText({
-    model <- lm(Average ~., data = filtered_data[, c("Average", independent_vars())])
-    adj_r_sq <- round(summary(model)$adj.r.squared, 2) * 100
+    adj_r_sq <- round(summary(model())$adj.r.squared, 2)
     adj_r_sq
   })
 }
+
 
 # Run the app
 shinyApp(ui, server)

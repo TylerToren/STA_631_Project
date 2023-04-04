@@ -3,6 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(corrplot)
 library(Lahman)
+library(purrr)
 
 # Load batting data from Lahman Baseball Database
 batting <- read.csv("Batting.csv") %>% 
@@ -66,21 +67,37 @@ awards <- read.csv("AwardsPlayers.csv") %>%
          "Awards" = awardID)
 
 #Removing the duplicate values
-batting <- batting[!duplicated(t(apply(batting,1,sort))),]
-people <- people[!duplicated(t(apply(people,1,sort))),]
-fielding <- fielding[!duplicated(t(apply(fielding,1,sort))),]
-salaries <- salaries[!duplicated(t(apply(salaries,1,sort))),]
-collegeplaying <- collegeplaying[!duplicated(t(apply(collegeplaying,1,sort))),]
-school <- school[!duplicated(t(apply(school,1,sort))),]
-awards <- awards[!duplicated(t(apply(awards,1,sort))),]
+# batting <- batting[!duplicated(t(apply(batting,1,sort))),]
+# people <- people[!duplicated(t(apply(people,1,sort))),]
+# fielding <- fielding[!duplicated(t(apply(fielding,1,sort))),]
+# salaries <- salaries[!duplicated(t(apply(salaries,1,sort))),]
+# collegeplaying <- collegeplaying[!duplicated(t(apply(collegeplaying,1,sort))),]
+# school <- school[!duplicated(t(apply(school,1,sort))),]
+# awards <- awards[!duplicated(t(apply(awards,1,sort))),]
+
+batting <- distinct(batting)
+people <- distinct(people)
+fielding <- distinct(fielding)
+salaries <- distinct(salaries)
+collegeplaying <- distinct(collegeplaying)
+school <- distinct(school)
+awards <- distinct(awards)
 
 #Merging all dataset to get one final dataset
-final_data <- merge(batting, people, by = "Player_ID")
-final_data <- merge(final_data, fielding, by = "Player_ID")
-final_data <- merge(final_data, salaries , by = "Player_ID")
-final_data <- merge(final_data, collegeplaying, by = "Player_ID")
-final_data <- merge(final_data, school, by = "School_Playing")
-final_data <- merge(final_data, awards, by = "Player_ID")
+# final_data <- merge(batting, people, by = "Player_ID")
+# final_data <- merge(final_data, fielding, by = "Player_ID")
+# final_data <- merge(final_data, salaries , by = "Player_ID")
+# final_data <- merge(final_data, collegeplaying, by = "Player_ID")
+# final_data <- merge(final_data, school, by = "School_Playing")
+# final_data <- merge(final_data, awards, by = "Player_ID")
+
+final_data <- batting %>%
+  left_join(people, by = "Player_ID",relationship = "many-to-many") %>%
+  left_join(fielding, by = "Player_ID",relationship = "many-to-many") %>%
+  left_join(salaries, by = "Player_ID",relationship = "many-to-many") %>%
+  left_join(collegeplaying, by = "Player_ID",relationship = "many-to-many") %>%
+  left_join(school, by = "School_Playing",relationship = "many-to-many") %>%
+  left_join(awards, by = "Player_ID",relationship = "many-to-many")
 
 
 # Create new variable for batting average
