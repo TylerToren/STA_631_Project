@@ -65,6 +65,7 @@ awards <- read.csv("AwardsPlayers.csv") %>%
   rename("Player_ID" = playerID,
          "Awards" = awardID)
 
+#Removing the duplicate values
 batting <- batting[!duplicated(t(apply(batting,1,sort))),]
 people <- people[!duplicated(t(apply(people,1,sort))),]
 fielding <- fielding[!duplicated(t(apply(fielding,1,sort))),]
@@ -94,9 +95,6 @@ final_data$Current_Age <- as.integer((Sys.Date() - as.Date(paste(final_data$Birt
 final_data$Debut_Age <- as.integer((Sys.Date() - as.Date(final_data$Debut)) / 365.25)
 final_data$FinalGame_Age <- as.integer((Sys.Date() - as.Date(final_data$Final_Game)) / 365.25)
 
-
-# Create a correlation matrix to identify potential predictors
-cor(final_data[,c("Average", "Games_Played", "Position", "Awards")])
 
 #Create a model
 model <- lm(Average ~ Games_Played + Position + School_Playing, data = final_data %>% filter(At_Bats > 30))
