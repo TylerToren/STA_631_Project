@@ -4,76 +4,49 @@ library(dplyr)
 library(ggplot2)
 library(corrplot)
 library(Lahman)
+library(data.table)
 
 # Load batting data from Lahman Baseball Database
-batting <- read.csv("Batting.csv") %>% 
-  select(playerID,yearID,stint,teamID,lgID,G,AB,R,H,X2B,X3B,HR) %>% 
-  rename("Player_ID" = playerID,
-         "Year_ID" = yearID,
-         "Stint" = stint,
-         "Team" = teamID,
-         "League" = lgID,
-         "Games_Played" = G,
-         "At_Bats" = AB,
-         "Runs" = R,
-         "Hits" = H,
-         "Doubles" = X2B,
-         "Triples" = X3B,
-         "Home_Runs" = HR)
-people <- read.csv("People.csv") %>% 
-  select(playerID,birthYear,birthMonth,birthDay,birthCountry,birthState,birthCity,nameFirst,nameLast,nameGiven,weight,height,bats,throws,debut,finalGame) %>% 
-  rename("Player_ID" = playerID,
-         "Birth_Year" = birthYear,
-         "Birth_Month" = birthMonth,
-         "Birth_Day" = birthDay,
-         "Birth_Country" = birthCountry,
-         "Birth_State" = birthState,
-         "Birth_City" = birthCity,
-         "First_Name" = nameFirst,
-         "Last_Name" = nameLast,
-         "Given_Name" = nameGiven,
-         "Weight" = weight,
-         "Height" = height,
-         "Batting_Hand" = bats,
-         "Throwing_Hand" = throws,
-         "Debut" = debut,
-         "Final_Game" = finalGame)
+batting <- fread("Batting.csv", select = c("playerID", "yearID", "stint", "teamID", "lgID", "G", "AB", "R", "H", "2B", "3B", "HR"))
+setnames(batting, old = c("playerID", "yearID", "stint", "teamID", "lgID", "G", "AB", "R", "H", "2B", "3B", "HR"), 
+         new = c("Player_ID", "Year_ID", "Stint", "Team", "League", "Games_Played", "At_Bats", "Runs", "Hits", "Doubles", "Triples", "Home_Runs"))
 
-fielding <- read.csv("Fielding.csv") %>% 
-  select(playerID,POS) %>% 
-  rename("Player_ID" = playerID,
-         "Position" = POS)
+people <- fread("People.csv", select = c("playerID", "birthYear", "birthMonth", "birthDay", "birthCountry", "birthState", "birthCity", "nameFirst", "nameLast", "nameGiven", "weight", "height", "bats", "throws", "debut", "finalGame"))
+setnames(people, old = c("playerID", "birthYear", "birthMonth", "birthDay", "birthCountry", "birthState", "birthCity", "nameFirst", "nameLast", "nameGiven", "weight", "height", "bats", "throws", "debut", "finalGame"), 
+         new = c("Player_ID", "Birth_Year", "Birth_Month", "Birth_Day", "Birth_Country", "Birth_State", "Birth_City", "First_Name", "Last_Name", "Given_Name", "Weight", "Height", "Batting_Hand", "Throwing_Hand", "Debut", "Final_Game"))
 
-salaries <- read.csv("Salaries.csv") %>% 
-  select(playerID, salary) %>% 
-  rename("Player_ID" = playerID,
-         "Salary" = salary)
+fielding <- fread("Fielding.csv", select = c("playerID", "POS"))
+setnames(fielding, old = c("playerID", "POS"), new = c("Player_ID", "Position"))
 
-collegeplaying <- read.csv("CollegePlaying.csv") %>% 
-  select(playerID, schoolID,yearID) %>% 
-  rename("Player_ID" = playerID,
-         "School_Playing" = schoolID,
-         "Year_ID" = yearID)
+salaries <- fread("Salaries.csv", select = c("playerID", "salary"))
+setnames(salaries, old = c("playerID", "salary"), new = c("Player_ID", "Salary"))
+
+collegeplaying <- fread("CollegePlaying.csv" , select = c("playerID","schoolID","yearID"))
+setnames(collegeplaying,old = c("playerID","schoolID","yearID"), new = c("Player_ID","School_Playing","Year_ID"))
+
+school <- fread("Schools.csv",select = c("schoolID","name_full"))
+setnames(school,old = c("schoolID","name_full"),new = c("School_Playing","School_Name"))
+
+awards <- fread("AwardsPlayers.csv", select = c("playerID","awardID"))
+setnames(awards,old = c("playerID","awardID"), new = c("Player_ID","Awards"))
 
 
-school <- read.csv("Schools.csv") %>% 
-  select(schoolID,name_full) %>% 
-  rename("School_Playing" = schoolID,
-         "School_Name" = name_full)
+setDT(batting)
+setDT(people)
+setDT(fielding)
+setDT(salaries)
+setDT(collegeplaying)
+setDT(school)
+setDT(awards)
 
-awards <- read.csv("AwardsPlayers.csv") %>% 
-  select(playerID,awardID) %>% 
-  rename("Player_ID" = playerID,
-         "Awards" = awardID)
+batting <- unique(batting, by = c("Player_ID", names(batting)[-1]))
+people <- unique(people, by = c("Player_ID", names(people)[-1]))
+fielding <- unique(fielding, by = c("Player_ID", names(fielding)[-1]))
+salaries <- unique(salaries, by = c("Player_ID", names(salaries)[-1]))
+collegeplaying <- unique(collegeplaying, by = c("Player_ID", names(collegeplaying)[-1]))
+school <- unique(school, by = c("School_Playing", names(school)[-1]))
+awards <- unique(awards, by = c("Player_ID", names(awards)[-1]))
 
-#Removing the duplicate values
-batting <- batting[!duplicated(t(apply(batting,1,sort))),]
-people <- people[!duplicated(t(apply(people,1,sort))),]
-fielding <- fielding[!duplicated(t(apply(fielding,1,sort))),]
-salaries <- salaries[!duplicated(t(apply(salaries,1,sort))),]
-collegeplaying <- collegeplaying[!duplicated(t(apply(collegeplaying,1,sort))),]
-school <- school[!duplicated(t(apply(school,1,sort))),]
-awards <- awards[!duplicated(t(apply(awards,1,sort))),]
 
 #Merging all dataset to get one final dataset
 final_data <- merge(batting, people, by = "Player_ID")
@@ -152,7 +125,7 @@ server <- function(input, output) {
   })
   
   output$adj_r_squared <- renderText({
-    adj_r_sq <- paste(round(summary(model())$adj.r.squared, 2) * 100," %")
+    adj_r_sq <- round(summary(model())$adj.r.squared, 2) * 100
     adj_r_sq
   })
 }
